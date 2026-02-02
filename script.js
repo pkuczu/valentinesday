@@ -11,8 +11,14 @@ let noClickCount = 0;
 let buttonHeight = 48;
 let buttonWidth = 80;
 let fontSize = 20;
-const imagePaths = ['./images/image1.gif','./images/image2.gif','./images/image3.gif','./images/image4.gif','./images/image5.gif','./images/image6.gif','./images/image7.gif'];
-
+const imagePaths = ['./images/image1.gif','./images/image2.jpeg','./images/image3.gif','./images/image4.jpeg','./images/image5.gif','./images/image6.gif','./images/image7.gif'];
+const noSounds = [
+  './sounds/rawr1.mp3',
+  './sounds/rawr2.mp3',
+  './sounds/rawr3.mp3',
+  './sounds/rawr4.mp3',
+  './sounds/rawr5.mp3'
+];
 //sound
 function playSound(soundPath) {const audio = new Audio(soundPath); audio.play();}
 
@@ -42,7 +48,8 @@ const getRandomNumber = (num) => {return Math.floor(Math.random() * (num + 1));}
   
   //no button
   noButton.addEventListener("click", () => {
-    playSound('./sounds/click.mp3');
+    const sound = noSounds[noClickCount] || noSounds[noSounds.length - 1];
+    playSound(sound);
     if (noClickCount < 4) {
       noClickCount++;
       imageDisplay.src = imagePaths[noClickCount] || "./images/image1.gif";
@@ -54,7 +61,7 @@ const getRandomNumber = (num) => {return Math.floor(Math.random() * (num + 1));}
       yesButton.style.fontSize = `${fontSize}px`;
   
       //no button text
-      const messages = ["No","Are you sure?","Babyy please?","Don't do this to me :(","Say yes or else...",];
+      const messages = ["No","Are you sure?","KRUPA please?","Dont meet me at the london","Say yes or else...",];
   
       if (noClickCount === 4) {
         const newButton = document.createElement("button");
@@ -84,21 +91,24 @@ const getRandomNumber = (num) => {return Math.floor(Math.random() * (num + 1));}
   
   //yes button
   yesButton.addEventListener("click", () => {
-    playSound('./sounds/click.mp3');
+    playSound('./sounds/wow.mp3');
     imageDisplay.remove(); 
     responseButtons.style.display = "none"; 
   
     //yes page
     valentineQuestion.innerHTML = `
-      <img src="./images/image7.gif" alt="Celebration duckie" style="display: block; margin: 0 auto; width: 200px; height: auto;"/>
-      Congratulations!!<br>
-      <span style="font-size: 20px; color: #bd1e59;">You have scored a baddie for Valentine's Day! <3</span>
-    `;
+  <img src="./images/image7.gif" alt="Celebration duckie" style="display: block; margin: 0 auto; width: 200px; height: auto;"/>
+  Congratulations!!<br>
+  <span style="font-size: 20px; color: #bd1e59;">
+    You locked it in with Patrick on Valentines day!😌<br>
+    Chicago → London on the 19th.✈️
+  </span>
+`;
     valentineQuestion.style.textAlign = "center"; 
   
     //make image go boing
     const bounceImage = document.createElement("img");
-    bounceImage.src = "./images/baddie.jpg";
+    bounceImage.src = "./images/baddie.jpeg";
     bounceImage.alt = "Baddie";
     bounceImage.style.position = "absolute";
     bounceImage.style.width = "300px";
